@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\OperationController;
+use DivisionByZeroError;
 use Illuminate\Console\Command;
 
 class operations extends Command
@@ -26,22 +27,30 @@ class operations extends Command
      */
     public function handle()
     {
-        switch($this->argument('operation')){
+        $operatorA = floatval($this->argument('operatorA'));
+        $operatorB = floatval($this->argument('operatorB'));
+        switch($this->argument('operation')){    
             case "add":
-                $result = OperationController::add($this->argument('operatorA'),$this->argument('operatorB'));
+                $result = OperationController::add($operatorA,$operatorB);
                 $this->info("Result: {$result['Result']}");
                 break;
             case "subtract":
-                $result = OperationController::subtract($this->argument('operatorA'),$this->argument('operatorB'));
+                $result = OperationController::subtract($operatorA,$operatorB);
                 $this->info("Result: {$result['Result']}");
                 break;
             case "multiply":
-                $result = OperationController::multiply($this->argument('operatorA'),$this->argument('operatorB'));
+                $result = OperationController::multiply($operatorA,$operatorB);
                 $this->info("Result: {$result['Result']}");
                 break;
             case "divide":
-                $result = OperationController::divide($this->argument('operatorA'),$this->argument('operatorB'));
-                $this->info("Result: {$result['Result']}");
+                $result = OperationController::divide($operatorA,$operatorB);
+                if($result['Result'] != "Can't divide by 0"){
+                    $this->info("Result: {$result['Result']}");
+                }
+                else{
+                    $this->error($result['Result']);
+                }
+                    
                 break;
             default:
                 $this->error("Operation type not supported.");
