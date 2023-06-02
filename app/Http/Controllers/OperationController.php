@@ -39,7 +39,7 @@ class OperationController extends Controller
             $result = $operatorA / $operatorB;
         }
         catch(DivisionByZeroError $e){
-            $result = "Can't divide by 0";
+            $result = "Can't divide by 0.";
         }
         return  [
             "Result" => $result

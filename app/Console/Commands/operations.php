@@ -44,7 +44,7 @@ class operations extends Command
                 break;
             case "divide":
                 $result = OperationController::divide($operatorA,$operatorB);
-                if($result['Result'] != "Can't divide by 0"){
+                if($result['Result'] != "Can't divide by 0."){
                     $this->info("Result: {$result['Result']}");
                 }
                 else{
