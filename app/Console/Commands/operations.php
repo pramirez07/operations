@@ -29,19 +29,19 @@ class operations extends Command
         switch($this->argument('operation')){
             case "add":
                 $result = OperationController::add($this->argument('operatorA'),$this->argument('operatorB'));
-                $this->info("Result: {$result}");
+                $this->info("Result: {$result['Result']}");
                 break;
             case "subtract":
                 $result = OperationController::subtract($this->argument('operatorA'),$this->argument('operatorB'));
-                $this->info("Result: {$result}");
+                $this->info("Result: {$result['Result']}");
                 break;
             case "multiply":
                 $result = OperationController::multiply($this->argument('operatorA'),$this->argument('operatorB'));
-                $this->info("Result: {$result}");
+                $this->info("Result: {$result['Result']}");
                 break;
             case "divide":
                 $result = OperationController::divide($this->argument('operatorA'),$this->argument('operatorB'));
-                $this->info("Result: {$result}");
+                $this->info("Result: {$result['Result']}");
                 break;
             default:
                 $this->error("Operation type not supported.");
